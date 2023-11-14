@@ -46,4 +46,8 @@ public class UserService {
         // Trả về đối tượng User
         return user;
     }
+
+    public User findByUsernameAndPassword(String username, String password) {
+        return null;
+    }
 }
