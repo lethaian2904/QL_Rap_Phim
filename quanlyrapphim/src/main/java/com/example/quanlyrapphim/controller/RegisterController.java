@@ -1,4 +1,4 @@
-package com.example.rapchieu.controller;
+package com.example.quanlyrapphim.controller;
 
 import java.sql.SQLException;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.rapchieu.entity.LoginCredential;
-import com.example.rapchieu.entity.User;
-import com.example.rapchieu.service.UserService;
-import com.example.rapchieu.repository.LoginCredentialRepository;
+import com.example.quanlyrapphim.entity.LoginCredential;
+import com.example.quanlyrapphim.entity.User;
+import com.example.quanlyrapphim.repository.LoginCredentialRepository;
+import com.example.quanlyrapphim.service.UserService;
 
 
 @RestController
@@ -29,8 +29,7 @@ public class RegisterController {
 
     @PostMapping("/")
     public ResponseEntity<User> register(@RequestBody User user) throws Exception {
-    try {
-       
+        try {
         LoginCredential loginCredential = new LoginCredential(user.getUsername(), user.getPassword());
         loginCredentialRepository.save(loginCredential);
 

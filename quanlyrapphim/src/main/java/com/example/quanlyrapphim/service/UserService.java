@@ -1,12 +1,11 @@
-package com.example.rapchieu.service;
-
-import com.example.rapchieu.entity.User;
-import com.example.rapchieu.repository.UserRepository;
+package com.example.quanlyrapphim.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
+import com.example.quanlyrapphim.entity.LoginCredential;
+import com.example.quanlyrapphim.entity.User;
+import com.example.quanlyrapphim.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -14,9 +13,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User findByUsernameAndPassword(String username, String password) throws Exception {
+    public User findByLoginCredential(LoginCredential loginCredential) throws Exception {
         // Tìm người dùng theo tên người dùng và mật khẩu
-        User user = userRepository.findByUsernameAndPassword(username, password);
+        User user = userRepository.findByUsernameAndPassword(loginCredential.getUsername(), loginCredential.getPassword());
 
         // Nếu người dùng không tồn tại trong cơ sở dữ liệu, ném ngoại lệ
         if (user == null) {
