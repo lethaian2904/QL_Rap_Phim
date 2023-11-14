@@ -26,14 +26,7 @@ public class UserService {
         return user;
     }
 
-    public User save(User user) throws Exception {
-        // Lưu trữ thông tin người dùng vào cơ sở dữ liệu
-        userRepository.save(user);
-
-        // Trả về đối tượng User
-        return user;
-    }
-
+   
     public User findByUsername(String username) throws Exception {
         // Tìm người dùng theo tên người dùng
         User user = userRepository.findByUsername(username);
@@ -49,5 +42,18 @@ public class UserService {
 
     public User findByUsernameAndPassword(String username, String password) {
         return null;
+    }
+
+    public User registerUser(LoginCredential loginCredential) throws Exception {
+        // Create a new user object
+        User user = new User();
+        user.setUsername(loginCredential.getUsername());
+        user.setPassword(loginCredential.getPassword());
+    
+        // Save the user to the database
+        userRepository.save(user);
+    
+        // Return the user object
+        return user;
     }
 }
