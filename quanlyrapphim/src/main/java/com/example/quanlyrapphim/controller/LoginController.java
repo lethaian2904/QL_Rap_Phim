@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.quanlyrapphim.entity.LoginCredential;
 import com.example.quanlyrapphim.entity.User;
-import com.example.quanlyrapphim.service.LoginCredentialService;
+import com.example.quanlyrapphim.service.UserService;
 
 @RestController
 @RequestMapping("/api/v1/login")
 public class LoginController {
 
     @Autowired
-    private LoginCredentialService loginCredentialService;
+    private UserService  UserService;
 
     @PostMapping("/")
     public ResponseEntity<String> login(@RequestBody LoginCredential loginCredential) {
         try {
-            User dbUser = loginCredentialService.findByLoginCredential(loginCredential);
+            User dbUser = UserService.findByLoginCredential(loginCredential);
             if (dbUser != null) {
                 return new ResponseEntity<>("Đăng nhập thành công", HttpStatus.OK);
             } else {

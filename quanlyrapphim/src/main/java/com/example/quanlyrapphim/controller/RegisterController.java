@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.quanlyrapphim.entity.LoginCredential;
 import com.example.quanlyrapphim.entity.User;
-import com.example.quanlyrapphim.repository.LoginCredentialRepository;
+import com.example.quanlyrapphim.repository.UserRepository;
 import com.example.quanlyrapphim.service.UserService;
 
 
@@ -24,14 +24,13 @@ public class RegisterController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private LoginCredentialRepository loginCredentialRepository;
+    
 
     @PostMapping("/")
     public ResponseEntity<User> register(@RequestBody User user) throws Exception {
         try {
         LoginCredential loginCredential = new LoginCredential(user.getUsername(), user.getPassword());
-        loginCredentialRepository.save(loginCredential);
+        UserRepository.save(loginCredential);
 
         // Lưu trữ thông tin người dùng vào cơ sở dữ liệu
         userService.save(user);
