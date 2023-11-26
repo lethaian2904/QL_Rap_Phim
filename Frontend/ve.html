@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Đặt vé xem phim</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            background: url(./img/slide-3-video.png);
+            background-position: center;
+            background-size: cover;
+            min-height: 100;
+            width: 100%;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            margin-top: 150px;
+
+        }
+
+        .controls label {
+            display: block;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+        }
+
+        .controls select,
+        .controls input[type="datetime-local"],
+        .controls select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .seat-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            perspective: 1000px;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-color: #bdc3c7;
+            border: 2px solid #34495e;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .seat.normal {
+            background-color: #bdc3c7;
+        }
+
+        .seat.vip {
+            background-color: #f39c12;
+            color: #fff;
+        }
+
+        .seat.selected {
+            background-color: #3498db;
+            transform: scale(1.1);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #3498db;
+            color: #ecf0f1;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #movie {
+            background-color: #fff;
+            color: black;
+        }
+
+        #datetime {
+            background-color: #fff;
+            color: black;
+        }
+
+        #ticket-type {
+            background-color: #fff;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Chọn ghế xem phim</h1>
+
+        <div class="controls">
+            <label for="movie">Chọn phim:</label>
+            <select id="movie">
+                <option value="movie1">Phim 1</option>
+                <option value="movie2">Phim 2</option>
+                <!-- Thêm các phim khác nếu cần -->
+            </select>
+
+            <label for="datetime">Chọn ngày giờ:</label>
+            <input type="datetime-local" id="datetime">
+
+            <label for="ticket-type">Chọn loại vé:</label>
+            <select id="ticket-type">
+                <option value="normal">Vé thường</option>
+                <option value="vip">Vé VIP</option>
+            </select>
+        </div>
+
+        <div id="seats" class="seat-container"></div>
+        <p id="message"></p>
+        <p id="total-price">Tổng giá: $0</p>
+        <button onclick="bookSeats()">Đặt vé</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const seatContainer = document.getElementById("seats");
+            const message = document.getElementById("message");
+            const totalPrice = document.getElementById("total-price");
+
+            // Tạo danh sách ghế
+            const seats = [];
+            const rows = 8;
+            const seatsPerRow = 10;
+
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < seatsPerRow; j++) {
+                    const seat = document.createElement("div");
+                    seat.classList.add("seat");
+                    seat.classList.add(getSeatType(i + 1, j + 1));
+                    seat.dataset.row = i + 1;
+                    seat.dataset.seat = j + 1;
+
+                    seats.push(seat);
+                    seatContainer.appendChild(seat);
+
+                    // Bắt sự kiện khi click vào ghế
+                    seat.addEventListener("click", function () {
+                        if (!this.classList.contains("occupied")) {
+                            this.classList.toggle("selected");
+                            updateMessage();
+                            updateTotalPrice();
+                        }
+                    });
+                }
+            }
+
+            // Hàm lấy loại ghế dựa trên hàng và cột
+            function getSeatType(row, seat) {
+                // Đây chỉ là ví dụ đơn giản, bạn có thể thay đổi theo ý của mình
+                return (row % 2 === 0 && seat % 2 === 0) ? "vip" : "normal";
+            }
+
+            // Cập nhật thông báo số ghế đã chọn
+            function updateMessage() {
+                const selectedSeats = document.querySelectorAll(".seat.selected");
+                message.innerText = `Bạn đã chọn ${selectedSeats.length} ghế`;
+            }
+
+            // Cập nhật tổng giá vé
+            function updateTotalPrice() {
+                const selectedSeats = document.querySelectorAll(".seat.selected");
+                const ticketType = document.getElementById("ticket-type").value;
+
+                const totalPriceValue = selectedSeats.length * (ticketType === "vip" ? 15 : 10);
+                totalPrice.innerText = `Tổng giá: $${totalPriceValue}`;
+            }
+
+            // Đặt vé
+            window.bookSeats = function () {
+                const selectedSeats = document.querySelectorAll(".seat.selected");
+                if (selectedSeats.length === 0) {
+                    alert("Vui lòng chọn ít nhất một ghế.");
+                } else {
+                    alert(`Đã đặt ${selectedSeats.length} ghế.`);
+                    // Có thể thêm mã logic để gửi thông tin đặt vé lên server ở đây
+                }
+            };
+        });
+
+    </script>
+</body>
+
+</html>
