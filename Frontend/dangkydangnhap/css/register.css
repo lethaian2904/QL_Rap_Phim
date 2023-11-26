@@ -9,7 +9,7 @@
 }
 
 body {
-    background: url(../img/R.jpg) no-repeat;
+    background: url(../img/slide-3-video.png) no-repeat;
     background-position: center;
     background-size: cover;
     min-height: 100;
@@ -138,7 +138,6 @@ input::placeholder {
 
 .open-slide {
     top: 50%;
-    transform: translate(-50%,-50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
     visibility: visible;
 }
-
