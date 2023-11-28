@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,10 @@
     <link rel="stylesheet" href="./css/register.css">
 
 </head>
+
 <body>
     <!-- ĐĂNG NHẬP  -->
-    <div>  
+    <div>
         <div class="container">
             <div class="form-box">
                 <form action="" name="Formfill" onsubmit="return validation()">
@@ -22,25 +24,30 @@
                     <p id="result"></p>
                     <div class="input-box">
                         <i class='bx bxs-user'></i>
-                        <input type="text" name="Username" placeholder="Tài khoản">
+                        <input id="username" type="text" name="Username" placeholder="Tài khoản">
                     </div>
                     <div class="input-box">
                         <i class='bx bxs-lock-alt'></i>
-                        <input type="password" name="Password" placeholder="Mật khẩu">
+                        <input id="password" type=" password" name="Password" placeholder="Mật khẩu">
                     </div>
                     <div class="button">
-                        <input type="submit" value="Đăng nhập" class="btn" onclick="validation()">
+                        <input id="btn-signin" type="submit" value="Đăng nhập" class="btn" onclick="validation()">
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- IONIC JS  -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <!-- MAIN JS  -->
-    <script src="./js/register.js"></script>
+    <script src="./js/dangnhap.js"></script>
 </body>
+
 </html>

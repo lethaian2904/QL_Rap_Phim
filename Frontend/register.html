@@ -25,7 +25,7 @@
                     <p id="result"></p>
                     <div class="input-box">
                         <i class='bx bxs-user'></i>
-                        <input type="text" name="Username" placeholder="Tài khoản">
+                        <input id="username" type="text" name="Username" placeholder="Tài khoản">
                     </div>
                     <div class="input-box">
                         <i class='bx bxs-envelope'></i>
@@ -34,14 +34,14 @@
 
                     <div class="input-box">
                         <i class='bx bxs-lock-alt'></i>
-                        <input type="password" name="Password" placeholder="Mật khẩu">
+                        <input id="password" type="password" name="Password" placeholder="Mật khẩu">
                     </div>
                     <div class="input-box">
                         <i class='bx bxs-lock-alt'></i>
                         <input type="password" name="CPassword" placeholder="Nhập lại mật khẩu">
                     </div>
                     <div class="button">
-                        <input type="submit" value="Đăng ký" class="btn" onclick="validation()">
+                        <input id="btn-signup" type="submit" value="Đăng ký" class="btn" onclick="validation()">
                     </div>
                     <div class="group">
                         <span><a href="./forgot_password.html">Quên mật khẩu</a></span>
@@ -51,14 +51,12 @@
             </div>
 
             <!-- THÔNG BÁO -->
-            <div class="popup" id="popup">
-                <ion-icon name="checkmark-circle-outline"></ion-icon>
-                <h2>Cảm ơn!</h2>
-                <p>Bạn đã đăng ký thành công.</p>
-                <a href="./login.html"><button onclick="closeSlide">OK</button></a>
-            </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- IONIC JS  -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
